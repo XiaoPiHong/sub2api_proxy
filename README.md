@@ -10,7 +10,7 @@
 2. 确保共享 Docker 网络存在（仅需执行一次）：
 
 ```bash
-docker network create deploy_sub2api-network
+docker network create sub2api-network
 ```
 
 ## 2. 启动代理栈
@@ -40,7 +40,7 @@ OUTBOUND_HTTPS_PROXY=http://mihomo:7890
 OUTBOUND_ALL_PROXY=socks5://mihomo:7890
 OUTBOUND_NO_PROXY=localhost,127.0.0.1,postgres,redis,sub2api-postgres,sub2api-redis
 UPDATE_PROXY_URL=http://mihomo:7890
-PROXY_NETWORK=deploy_sub2api-network
+PROXY_NETWORK=sub2api-network
 ```
 
 ### 4.2 新建 `docker-compose.override.yml`
