@@ -5,6 +5,22 @@ log-level: info
 external-controller: 0.0.0.0:9090
 secret: "xiaopihong123456.@"
 
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: redir-host
+  respect-rules: true
+  nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  proxy-server-nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  direct-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
 proxy-providers:
   main:
     type: http
