@@ -1,0 +1,25 @@
+name: proxy-stack
+
+services:
+  mihomo:
+    container_name: mihomo
+    image: docker.io/metacubex/mihomo:Alpha
+    restart: unless-stopped
+    volumes:
+      - ./config/mihomo.yaml:/root/.config/mihomo/config.yaml:ro
+      - ./config/providers:/root/.config/mihomo/providers
+      - ./logs:/root/.config/mihomo/logs
+    # Bind controller API to localhost to avoid public exposure
+    ports:
+      - "127.0.0.1:9090:9090"
+    # Business containers access proxy ports via Docker network
+    expose:
+      - "7890"
+      - "7891"
+    networks:
+      - deploy_sub2api-network
+
+networks:
+  deploy_sub2api-network:
+    external: true
+    name: deploy_sub2api-network
