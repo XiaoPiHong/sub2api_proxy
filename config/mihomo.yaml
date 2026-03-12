@@ -5,6 +5,33 @@ log-level: info
 external-controller: 0.0.0.0:9090
 secret: "xiaopihong123456.@"
 
+hosts:
+  77y6q.s7kca.tianschool.cn: 183.6.234.50
+  wr8wf.x2tq5z.cd7p9kdg8w.website: 183.6.234.50
+  78ex1.ukutky.gtmzidong.top: 183.6.234.50
+  nxppg5.jmcb7q.cd7p9kdg8w.website: 120.198.71.131
+
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  enhanced-mode: redir-host
+  respect-rules: true
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - 1.1.1.1
+    - 8.8.8.8
+  nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  proxy-server-nameserver:
+    - https://1.1.1.1/dns-query
+    - https://8.8.8.8/dns-query
+  direct-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
 proxy-providers:
   main:
     type: http
