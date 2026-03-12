@@ -17,9 +17,9 @@ services:
       - "7890"
       - "7891"
     networks:
-      - sub2api-network
+      - deploy_sub2api-network
 
 networks:
-  sub2api-network:
+  deploy_sub2api-network:
     external: true
-    name: sub2api-network
+    name: deploy_sub2api-network

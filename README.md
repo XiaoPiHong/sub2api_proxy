@@ -10,7 +10,7 @@
 2. 确保共享 Docker 网络存在（仅需执行一次）：
 
 ```bash
-docker network create sub2api-network
+docker network create deploy_sub2api-network
 ```
 
 ## 2. 启动代理栈
@@ -40,7 +40,7 @@ OUTBOUND_HTTPS_PROXY=http://mihomo:7890
 OUTBOUND_ALL_PROXY=socks5://mihomo:7890
 OUTBOUND_NO_PROXY=localhost,127.0.0.1,postgres,redis,sub2api-postgres,sub2api-redis
 UPDATE_PROXY_URL=http://mihomo:7890
-PROXY_NETWORK=sub2api-network
+PROXY_NETWORK=deploy_sub2api-network
 ```
 
 ### 4.2 新建 `docker-compose.override.yml`
@@ -90,25 +90,36 @@ ports:
 Windows PowerShell（推荐）：
 
 ```powershell
-ssh -L 9090:127.0.0.1:9090 root@你的服务器IP
+ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:9090:127.0.0.1:9090 root@你的服务器IP
 ```
 
 macOS / Linux：
 
 ```bash
-ssh -L 9090:127.0.0.1:9090 root@你的服务器IP
+ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:9090:127.0.0.1:9090 root@你的服务器IP
 ```
 
 说明：
 - 这条命令会把你本机 `127.0.0.1:9090` 转发到服务器 `127.0.0.1:9090`
 - 终端窗口保持连接状态，隧道才有效
+- 示例：
+  `ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:9090:127.0.0.1:9090 root@119.29.249.17`
 
 ### 5.3 本地打开面板地址并连接
 
-1. 在浏览器打开任一面板前端（例如 Yacd 或 metacubexd）。
-2. 控制器地址填写：`127.0.0.1:9090`
-3. Secret 填写：`config/mihomo.yaml` 中的 `secret`
-4. 保存后即可在面板中切换节点/策略组、刷新订阅
+1. 在浏览器打开 `metacubexd`：`https://metacubexd.pages.dev/`
+2. 若上面地址不可用，可使用 `Yacd`：`https://yacd.metacubex.one/`
+3. 控制器地址填写：`http://127.0.0.1:9090`
+4. Secret 填写：`config/mihomo.yaml` 中的 `secret`
+5. 保存后即可在面板中切换节点/策略组、刷新订阅
+
+可选本地连通性测试（先不走面板）：
+
+```bash
+curl -H "Authorization: Bearer <你的secret>" http://127.0.0.1:9090/version
+```
+
+若返回版本 JSON，说明 SSH 隧道和控制器均正常。
 
 ## 6. 安全建议
 
