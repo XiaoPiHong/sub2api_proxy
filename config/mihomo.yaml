@@ -5,51 +5,227 @@ log-level: info
 external-controller: 0.0.0.0:9090
 secret: "xiaopihong123456.@"
 
-hosts:
-  77y6q.s7kca.tianschool.cn: 183.6.234.50
-  wr8wf.x2tq5z.cd7p9kdg8w.website: 183.6.234.50
-  78ex1.ukutky.gtmzidong.top: 183.6.234.50
-  nxppg5.jmcb7q.cd7p9kdg8w.website: 120.198.71.131
-
 dns:
   enable: true
-  listen: 0.0.0.0:1053
+  listen: 127.0.0.1:5335
   ipv6: false
-  enhanced-mode: redir-host
-  respect-rules: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "stun.*.*.*"
+    - "stun.*.*"
+    - time.windows.com
+    - time.nist.gov
+    - time.apple.com
+    - time.asia.apple.com
+    - "*.ntp.org.cn"
+    - "*.openwrt.pool.ntp.org"
+    - time1.cloud.tencent.com
+    - time.ustc.edu.cn
+    - pool.ntp.org
+    - ntp.ubuntu.com
+    - ntp.aliyun.com
+    - ntp1.aliyun.com
+    - ntp2.aliyun.com
+    - ntp3.aliyun.com
+    - ntp4.aliyun.com
+    - ntp5.aliyun.com
+    - ntp6.aliyun.com
+    - ntp7.aliyun.com
+    - time1.aliyun.com
+    - time2.aliyun.com
+    - time3.aliyun.com
+    - time4.aliyun.com
+    - time5.aliyun.com
+    - time6.aliyun.com
+    - time7.aliyun.com
+    - "*.time.edu.cn"
+    - time1.apple.com
+    - time2.apple.com
+    - time3.apple.com
+    - time4.apple.com
+    - time5.apple.com
+    - time6.apple.com
+    - time7.apple.com
+    - time1.google.com
+    - time2.google.com
+    - time3.google.com
+    - time4.google.com
+    - music.163.com
+    - "*.music.163.com"
+    - "*.126.net"
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - "*.kuwo.cn"
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - "*.y.qq.com"
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - "*.xiami.com"
+    - "*.music.migu.cn"
+    - music.migu.cn
+    - "*.msftconnecttest.com"
+    - "*.msftncsi.com"
+    - localhost.ptlogin2.qq.com
+    - "*.*.*.srv.nintendo.net"
+    - "*.*.stun.playstation.net"
+    - "xbox.*.*.microsoft.com"
+    - "*.ipv6.microsoft.com"
+    - "*.*.xboxlive.com"
+    - speedtest.cros.wr.pvp.net
   default-nameserver:
     - 223.5.5.5
-    - 119.29.29.29
-    - 1.1.1.1
+    - 182.254.118.118
+    - 180.76.76.76
+    - system
     - 8.8.8.8
+    - 180.184.2.2
   nameserver:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
+    - "https://223.5.5.5/dns-query#skip-cert-verify=true"
+    - "https://doh.pub/dns-query#skip-cert-verify=true"
+    - "https://dns.alidns.com/dns-query#skip-cert-verify=true"
+    - "tls://223.5.5.5#skip-cert-verify=true"
+    - "tls://dot.pub#skip-cert-verify=true"
+    - "tls://dns.alidns.com#skip-cert-verify=true"
+    - "https://223.6.6.6/dns-query#skip-cert-verify=true&h3=true"
+    - "https://cloudflare-dns.com/dns-query#skip-cert-verify=true"
   proxy-server-nameserver:
-    - https://1.1.1.1/dns-query
-    - https://8.8.8.8/dns-query
-  direct-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
+    - "https://223.5.5.5/dns-query#skip-cert-verify=true"
+    - "https://doh.pub/dns-query#skip-cert-verify=true"
+    - "https://dns.alidns.com/dns-query#skip-cert-verify=true"
+    - "tls://223.5.5.5#skip-cert-verify=true"
+    - "tls://dot.pub#skip-cert-verify=true"
+    - "tls://dns.alidns.com#skip-cert-verify=true"
+    - "https://223.6.6.6/dns-query#skip-cert-verify=true&h3=true"
+    - "https://cloudflare-dns.com/dns-query#skip-cert-verify=true"
+  fallback-filter:
+    geoip: false
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      - 127.0.0.1/32
+    domain:
+      - "+.google.com"
+      - "+.facebook.com"
+      - "+.twitter.com"
+      - "+.youtube.com"
+      - "+.xn--ngstr-lra8j.com"
+      - "+.google.cn"
+      - "+.googleapis.cn"
+      - "+.googleapis.com"
+      - "+.gvt1.com"
 
 proxy-providers:
   main:
     type: http
-    # TODO: Replace with your VPN subscription URL
     url: "https://speedtest.jhelbt92.tianschool.cn/api/v1/client/subscribe?token=b20ae829b6ea8995b26a789b60757677"
     path: ./providers/main.yaml
     interval: 3600
     health-check:
       enable: true
       interval: 300
-      url: https://www.gstatic.com/generate_204
+      url: http://www.gstatic.com/generate_204
 
 proxy-groups:
-  - name: Proxy
+  - name: "🔰 节点选择"
     type: select
+    proxies:
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+      - "🚥 故障转移"
+      - "🎛 负载均衡"
+    use:
+      - main
+
+  - name: "♻️ 自动选择"
+    type: url-test
+    use:
+      - main
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+
+  - name: "🎯 全球直连"
+    type: select
+    proxies:
+      - DIRECT
+    use:
+      - main
+
+  - name: "🚥 故障转移"
+    type: fallback
+    use:
+      - main
+    url: http://www.gstatic.com/generate_204
+    interval: 60
+
+  - name: "🎛 负载均衡"
+    type: load-balance
+    strategy: consistent-hashing
+    use:
+      - main
+    url: http://www.gstatic.com/generate_204
+    interval: 600
+
+  - name: "🤖 人工智能"
+    type: select
+    proxies:
+      - "🔰 节点选择"
+      - "♻️ 自动选择"
+      - "🎯 全球直连"
+    use:
+      - main
+
+  - name: "🐟 漏网之鱼"
+    type: select
+    proxies:
+      - "🔰 节点选择"
+      - "🎯 全球直连"
+      - "♻️ 自动选择"
     use:
       - main
 
 rules:
   - DOMAIN,speedtest.jhelbt92.tianschool.cn,DIRECT
-  - MATCH,Proxy
+  - DOMAIN-SUFFIX,ai.com,🤖 人工智能
+  - DOMAIN-SUFFIX,chatgpt.com,🤖 人工智能
+  - DOMAIN-SUFFIX,openai.com,🤖 人工智能
+  - DOMAIN-SUFFIX,cdn.oaistatic.com,🤖 人工智能
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net,🤖 人工智能
+  - DOMAIN,openaiapi-site.azureedge.net,🤖 人工智能
+  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net,🤖 人工智能
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net,🤖 人工智能
+  - DOMAIN,production-openaicom-storage.azureedge.net,🤖 人工智能
+  - DOMAIN-SUFFIX,oaistatic.com,🤖 人工智能
+  - DOMAIN-SUFFIX,oaiusercontent.com,🤖 人工智能
+  - DOMAIN-SUFFIX,o33249.ingest.sentry.io,🤖 人工智能
+  - DOMAIN-SUFFIX,anthropic.com,🤖 人工智能
+  - DOMAIN-SUFFIX,claude.ai,🤖 人工智能
+  - DOMAIN-SUFFIX,copilot.microsoft.com,🤖 人工智能
+  - DOMAIN-SUFFIX,gemini.google.com,🤖 人工智能
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com,🤖 人工智能
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com,🤖 人工智能
+  - DOMAIN-SUFFIX,meta.ai,🤖 人工智能
+  - DOMAIN-SUFFIX,perplexity.ai,🤖 人工智能
+  - DOMAIN-SUFFIX,apple-relay.apple.com,🤖 人工智能
+  - DOMAIN,guzzoni.smoot.apple.com,🤖 人工智能
+  - DOMAIN-SUFFIX,local,🎯 全球直连
+  - IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
+  - IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
+  - IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
+  - IP-CIDR,100.64.0.0/10,🎯 全球直连,no-resolve
+  - IP-CIDR6,::1/128,🎯 全球直连,no-resolve
+  - IP-CIDR6,fc00::/7,🎯 全球直连,no-resolve
+  - IP-CIDR6,fe80::/10,🎯 全球直连,no-resolve
+  - IP-CIDR6,fd00::/8,🎯 全球直连,no-resolve
+  - MATCH,🐟 漏网之鱼
