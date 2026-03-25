@@ -36,7 +36,7 @@ proxy-providers:
   main:
     type: http
     # TODO: Replace with your VPN subscription URL
-    url: "https://speedtest.jhelbt92.tianschool.cn/api/v1/client/subscribe?token=129676996dd28fc2bbcef57156b1b4c1"
+    url: "https://speedtest.jhelbt92.tianschool.cn/api/v1/client/subscribe?token=b20ae829b6ea8995b26a789b60757677"
     path: ./providers/main.yaml
     interval: 3600
     health-check:
